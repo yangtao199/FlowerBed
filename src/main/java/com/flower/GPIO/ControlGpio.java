@@ -36,6 +36,7 @@ public class ControlGpio {
     }
     static{
         GpioController gpio  = GpioFactory.getInstance();
+        //红外感应
         MapGpioPinDigitalInput.put("InfraredInduction",gpio.provisionDigitalInputPin(RaspiPin.GPIO_25, PinPullResistance.PULL_DOWN));
     }
 
