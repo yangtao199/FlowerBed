@@ -42,7 +42,7 @@ public class ListenerInfraredInduction implements CommandLineRunner, Ordered {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("开始监听红外");
-       // ListenerInfraredInduction();
+        ListenerInfraredInduction();
     }
 
     @Override
