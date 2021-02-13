@@ -1,9 +1,12 @@
 package com.flower.GPIO;
 
+import com.flower.flowerCulture.service.InfraredmonitoringService;
+import com.flower.util.SpringUtil;
 import com.pi4j.io.gpio.*;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
@@ -30,6 +33,13 @@ public class ListenerInfraredInduction implements CommandLineRunner, Ordered {
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
                 // display pin state on console
                 System.out.println("变化了！");
+                if(event.getState().getName().equals("HIGH")){
+                    InfraredmonitoringService infraredmonitoringService = (InfraredmonitoringService) SpringUtil.getBean(InfraredmonitoringService.class);
+                    //抓拍图像（base64）
+                    String img = "imagebase64";
+                    infraredmonitoringService.insertInfraredmonitoring(img);
+                }
+
                 System.out.println(" --> GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState()+";   source=	"+event.getSource());
                /* while(true) {
                     Thread.sleep(500);

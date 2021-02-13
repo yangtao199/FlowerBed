@@ -23,11 +23,11 @@ public class Sensor implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Double temperature;
+    private Double temperature;//温度
 
-    private Double humidity;
+    private Double humidity;//湿度
 
-    private Double brightness;
+    private Double brightness;//亮度
 
     private Date time;
 

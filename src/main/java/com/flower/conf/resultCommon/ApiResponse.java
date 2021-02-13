@@ -30,17 +30,7 @@ public class ApiResponse<T> implements Serializable {
    * 返回数据
    */
   private T data;
- 
-  /**
-   * 成功返回，无数据
-   *
-   * @return 自定义的 ApiResponse 对象
-   */
-  public static ApiResponse<Object> success() {
-    return new ApiResponse<>(ApiCode.API_OK.code(), ApiCode.API_OK.getMsg(), "");
-  }
- 
-  /**
+    /**
    * 成功返回，有数据
    *
    * @param object 返回数据
@@ -50,7 +40,15 @@ public class ApiResponse<T> implements Serializable {
   public static <T> ApiResponse<T> success(T object) {
     return new ApiResponse<>(ApiCode.API_OK.code(), ApiCode.API_OK.getMsg(), object);
   }
- 
+
+  /**
+   * 成功返回，无数据
+   *
+   * @return 自定义的 ApiResponse 对象
+   */
+  public static ApiResponse<Object> success() {
+    return new ApiResponse<>(ApiCode.API_OK.code(), ApiCode.API_OK.getMsg(), "");
+  }
   /**
    * 失败返回
    *

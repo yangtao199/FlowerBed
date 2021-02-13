@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
@@ -25,7 +26,7 @@ import java.util.HashMap;
 @EnableScheduling
 //@EnableAsync
 public class Task extends ControlGpio{
-    HashMap<String,GpioPinDigitalOutput> pin = super.getfinalpin();
+    //HashMap<String,GpioPinDigitalOutput> pin = super.getfinalpin();
 
     @Scheduled(cron = "0/10 * * * * ?")//10s执行一次
     @Scheduled(cron = "0 */1 * * * ? ")//1分钟执行一次
@@ -37,11 +38,11 @@ public class Task extends ControlGpio{
 
 
     public void bandian() throws Exception {
-        System.out.println("开始执行");
+        //System.out.println("开始执行");
 
         //监听温度湿度
         ListenerTemperatureHumidity TH = new ListenerTemperatureHumidity();
-        TH.getTemperatureHumidity(pin);
+        TH.getTemperatureHumidity(MapGpioPinDigitalOutput);
        /* System.out.println("一分钟执行一次");
       //  GpioController gpio = super.getGPIO();
         // set shutdown state for this pin
