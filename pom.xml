@@ -65,7 +65,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.47</version>
         </dependency>
-
+        <dependency>
+            <!-- websocket -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
         <!-- mybatis plus 代码生成器 -->
         <dependency>
             <groupId>com.baomidou</groupId>
