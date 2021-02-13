@@ -16,5 +16,14 @@
         id,
         temperature, humidity, brightness, time
     </sql>
-
+    <select id="getDatas" resultType="com.flower.flowerCulture.vo.SensorVo">
+        select
+        MAX(temperature) as maxTemperature,
+        MAX(humidity) as maxHumidity,
+        MIN(temperature) as minTemperature,
+        MIN(humidity) as minHumidity,
+        (select sum(timeslot) from ledtimeslot WHERE type=0) as artificialIllumination,
+        (select sum(timeslot) from ledtimeslot WHERE type=1) as illumination
+        FROM sensor
+    </select>
 </mapper>
