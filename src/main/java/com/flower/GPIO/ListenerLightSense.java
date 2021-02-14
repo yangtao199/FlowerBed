@@ -2,6 +2,7 @@ package com.flower.GPIO;
 
 import com.flower.flowerCulture.service.LedtimeslotService;
 import com.flower.flowerCulture.service.LightingService;
+import com.flower.flowerCulture.service.impl.ControlpanelServiceImpl;
 import com.flower.util.SpringUtil;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
@@ -40,7 +41,8 @@ public class ListenerLightSense implements CommandLineRunner, Ordered {
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
                 // display pin state on console
                 LedtimeslotService ledtimeslotService = (LedtimeslotService) SpringUtil.getBean(LedtimeslotService.class);
-
+                if("1".equals(ControlpanelServiceImpl.hardwareState.get("Lighting")))
+                    return;
                 if("HIGH".equals(event.getState().getName())){
                     System.out.println("开灯");
                     gpioLED.high();

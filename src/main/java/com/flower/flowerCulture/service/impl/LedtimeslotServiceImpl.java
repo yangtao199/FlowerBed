@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -35,5 +36,13 @@ public class LedtimeslotServiceImpl extends ServiceImpl<LedtimeslotMapper, Ledti
         ledtimeslot.setTimeslot(minutes);
         int msg = ledtimeslotMapper.insert(ledtimeslot);
         System.out.println(msg);
+    }
+    /**
+     * 分组查询LED光照的时间（人工和自然光照）
+     * @return
+     */
+    @Override
+    public List<Ledtimeslot> SelectLedtimeslot() {
+        return ledtimeslotMapper.SelectLedtimeslot();
     }
 }

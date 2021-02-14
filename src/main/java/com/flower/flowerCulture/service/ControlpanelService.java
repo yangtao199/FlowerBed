@@ -12,5 +12,31 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-02-14
  */
 public interface ControlpanelService extends IService<Controlpanel> {
+    /**
+     * 灯光
+     * @param lighting
+     * @return
+     */
+    int SetLighting(String lighting);
 
+    /**
+     * 雾化器
+     * @param atomizer
+     * @return
+     */
+    int SetAtomizer(String atomizer);
+
+    /**
+     * 风扇
+     * @param fan
+     * @return
+     */
+    int SetFan(String fan);
+
+    /**
+     * 水泵
+     * @param waterPump
+     * @return
+     */
+    int SetWaterump(String waterPump);
 }

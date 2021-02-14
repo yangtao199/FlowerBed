@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -52,6 +53,35 @@ public class SensorServiceImpl extends ServiceImpl<SensorMapper, Sensor> impleme
     public SensorVo getDatas() {
 
         return sensorMapper.getDatas();
+    }
+    /**
+     * 分组查询温度档
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<SensorVo> getCountTemperature() {
+        return sensorMapper.getCountTemperature();
+    }
+
+    /**
+     * 分组查询湿度
+     * @return
+     */
+    @Override
+    public List<SensorVo> getCountHumidity() {
+        return sensorMapper.getCountHumidity();
+    }
+
+    /**
+     * 分组查询历史温度湿度
+     * @return
+     */
+    @Override
+    public List<Sensor> getGroupSensor() {
+        Sensor sensor = new Sensor();
+        sensor.setTime(new Date());
+        return sensorMapper.getGroupSensor(sensor);
     }
 
 }

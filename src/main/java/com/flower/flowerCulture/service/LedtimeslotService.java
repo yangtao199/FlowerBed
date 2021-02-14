@@ -3,6 +3,8 @@ package com.flower.flowerCulture.service;
 import com.flower.flowerCulture.model.Ledtimeslot;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -18,4 +20,10 @@ public interface LedtimeslotService extends IService<Ledtimeslot> {
      * @param minutes
      */
     void inserttimeslot(String type,float minutes);
+
+    /**
+     * 分组查询LED光照的时间（人工和自然光照）
+     * @return
+     */
+    List<Ledtimeslot>  SelectLedtimeslot();
 }

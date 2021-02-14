@@ -30,6 +30,7 @@ public class Sensor implements Serializable {
     private Double brightness;//亮度
 
     private Date time;
+    private String counts;
 
 
 }

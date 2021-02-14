@@ -15,5 +15,9 @@
         id,
         time, type, timeslot
     </sql>
+    <!-- 查询LED光照时间（人工和自然光照） -->
+    <select id="SelectLedtimeslot" resultType="com.flower.flowerCulture.model.Ledtimeslot">
+        select SUM(timeslot) as timeslot,type from ledtimeslot GROUP BY type
+    </select>
 
 </mapper>

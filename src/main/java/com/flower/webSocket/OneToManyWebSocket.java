@@ -1,10 +1,13 @@
 package com.flower.webSocket;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -87,12 +90,12 @@ public class OneToManyWebSocket {
      * @param message
      *            消息内容
      */
-    public void sendMessageALL(String message) {
+    public void sendMessageALL(HashMap<String, String>  message) {
         for (Map.Entry<String, Session> sessionEntry : clients.entrySet()) {
             Session toSession = sessionEntry.getValue();
-            // 排除掉自己
             log.info("服务端给客户端[{}]发送消息{}", toSession.getId(), message);
-            toSession.getAsyncRemote().sendText(message);
+            String  param= JSON.toJSONString(message);
+            toSession.getAsyncRemote().sendText(param);
 
         }
     }

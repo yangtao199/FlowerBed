@@ -22,22 +22,16 @@ public class loginHandlerInterceptor implements HandlerInterceptor {
         response.setCharacterEncoding("utf-8");
      /*   response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");*/
-        session.getAttribute("code");
-        if(session.getAttribute("user")==null){
+       /* if(session.getAttribute("user")==null){
             PrintWriter writer = response.getWriter();
             ApiResponse<Object> res = ApiResponse.fail(ApiCode.API_NOLOGIN_EXISTS,"null");
-            //res.getCode();
             String jsonStr = JSONObject.toJSONString(res);
-
-
             writer.print(jsonStr);
             writer.flush();
             writer.close();
-
-            /*request.setAttribute("msg","请先登录");
-            request.getRequestDispatcher("/").forward(request,response);*/
             return  false;
-        }
-        else return true;
+        }*/
+        //else
+         return true;
     }
 }

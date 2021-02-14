@@ -30,4 +30,5 @@ public class Ledtimeslot implements Serializable {
     private float timeslot;
 
 
+
 }

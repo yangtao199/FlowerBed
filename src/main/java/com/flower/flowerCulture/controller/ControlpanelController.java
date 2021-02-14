@@ -2,6 +2,8 @@ package com.flower.flowerCulture.controller;
 
 
 import com.flower.conf.resultCommon.ApiResponse;
+import com.flower.flowerCulture.service.ControlpanelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/controlpanel")
 public class ControlpanelController {
+    @Autowired
+    private ControlpanelService controlpanelService;
     /**
      * 灯光
      * @param request
@@ -31,7 +35,8 @@ public class ControlpanelController {
     @ResponseBody
     public ApiResponse<Object> SetLighting(HttpServletRequest request) throws Exception {
        String lighting = request.getParameter("lighting");
-        return ApiResponse.success();
+        int i = controlpanelService.SetLighting(lighting);
+        return ApiResponse.success(i);
     }
     /**
      * 雾化器
@@ -43,7 +48,8 @@ public class ControlpanelController {
     @ResponseBody
     public ApiResponse<Object> SetAtomizer(HttpServletRequest request) throws Exception {
         String atomizer = request.getParameter("atomizer");
-        return ApiResponse.success();
+        int i = controlpanelService.SetAtomizer(atomizer);
+        return ApiResponse.success(i);
     }
 
     /**
@@ -55,8 +61,9 @@ public class ControlpanelController {
     @RequestMapping(value = {"/fan"}, method = {RequestMethod.GET})
     @ResponseBody
     public ApiResponse<Object> SetFan(HttpServletRequest request) throws Exception {
-        String atomizer = request.getParameter("fan");
-        return ApiResponse.success();
+        String fan = request.getParameter("fan");
+        int i = controlpanelService.SetFan(fan);
+        return ApiResponse.success(i);
     }
 
     /**
@@ -69,8 +76,7 @@ public class ControlpanelController {
     @ResponseBody
     public ApiResponse<Object> SetWaterump(HttpServletRequest request) throws Exception {
         String waterPump = request.getParameter("waterPump");
-        return ApiResponse.success();
+        int i = controlpanelService.SetWaterump(waterPump);
+        return ApiResponse.success(i);
     }
-
-
 }

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class CORSConfiguration extends WebMvcConfigurerAdapter
 {
   public void addCorsMappings(CorsRegistry registry) {
-    registry.addMapping("/**").allowedMethods("*").allowedOrigins("ws://172.24.55.2:8081","http://127.0.0.1:8082").allowCredentials(true).allowedHeaders("*");
+    registry.addMapping("/**").allowedMethods("*").allowedOrigins("ws://172.24.55.2:8081","http://127.0.0.1:8848").allowCredentials(true).allowedHeaders("*");
     super.addCorsMappings(registry);
   }
 }

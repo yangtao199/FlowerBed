@@ -4,6 +4,7 @@ import com.flower.flowerCulture.model.User;
 import com.flower.flowerCulture.mapper.UserMapper;
 import com.flower.flowerCulture.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
-
+    @Autowired
+    private UserMapper userMapper;
+    /**
+     * 登陆
+     * @param user
+     * @return
+     */
+    @Override
+    public User getUserForPassword(User user) {
+        return userMapper.getUserForPassword(user);
+    }
 }

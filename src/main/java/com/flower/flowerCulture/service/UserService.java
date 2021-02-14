@@ -12,5 +12,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-02-07
  */
 public interface UserService extends IService<User> {
-
+    /**
+     * 登陆
+     * @param user
+     * @return
+     */
+    User getUserForPassword(User user);
 }

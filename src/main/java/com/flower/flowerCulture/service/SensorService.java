@@ -4,6 +4,8 @@ import com.flower.flowerCulture.model.Sensor;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.flower.flowerCulture.vo.SensorVo;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -27,4 +29,22 @@ public interface SensorService extends IService<Sensor> {
      * 温度、湿度、光照信息统计
      */
     SensorVo getDatas();
+    /**
+     * 分组查询温度档
+     * @return
+     * @throws Exception
+     */
+    List<SensorVo> getCountTemperature();
+
+    /**
+     * 分组查询湿度
+     * @return
+     */
+    List<SensorVo> getCountHumidity();
+
+    /**
+     * 分组查询历史温度湿度
+     * @return
+     */
+    List<Sensor> getGroupSensor();
 }

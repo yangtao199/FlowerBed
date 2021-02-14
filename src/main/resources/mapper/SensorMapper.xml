@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flower.flowerCulture.mapper.SensorMapper">
-
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.flower.flowerCulture.model.Sensor">
     <result column="id" property="id" />
@@ -10,7 +9,6 @@
         <result column="brightness" property="brightness" />
         <result column="time" property="time" />
     </resultMap>
-
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id,
@@ -25,5 +23,28 @@
         (select sum(timeslot) from ledtimeslot WHERE type=0) as artificialIllumination,
         (select sum(timeslot) from ledtimeslot WHERE type=1) as illumination
         FROM sensor
+    </select>
+    <!--  分组查询温度档 -->
+    <select id="getCountTemperature"  resultType="com.flower.flowerCulture.vo.SensorVoCounts">
+      select COUNT(temperature) as counts,temperature from sensor GROUP BY temperature
+    </select>
+    <!--  分组查询湿度档 -->
+    <select id="getCountHumidity"  resultType="com.flower.flowerCulture.vo.SensorVoCounts">
+        select COUNT(humidity) as counts,humidity from sensor GROUP BY humidity
+    </select>
+    <!--  分组查询历史温度、湿度 -->
+    <select id="getGroupSensor"  resultType="com.flower.flowerCulture.model.Sensor">
+        SELECT
+        avg(humidity) as humidity,
+        avg(temperature) as temperature,
+        DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s') AS time
+        FROM
+        sensor
+        WHERE
+        time &gt;= '2021-2-13 06:00:00'
+        AND time &lt;=  now()
+        GROUP BY
+        DATE_FORMAT(time, '%Y-%m-%d %H')
+        desc limit 30
     </select>
 </mapper>

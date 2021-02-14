@@ -3,6 +3,7 @@ package com.flower.GPIO;
 import com.flower.conf.readFile.readFile;
 import com.flower.flowerCulture.mapper.SensorMapper;
 import com.flower.flowerCulture.service.SensorService;
+import com.flower.flowerCulture.service.impl.ControlpanelServiceImpl;
 import com.flower.util.SpringUtil;
 import com.flower.webSocket.OneToManyWebSocket;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
@@ -20,6 +21,7 @@ public class ListenerTemperatureHumidity{
     final GpioPinDigitalOutput gpioLED = ControlGpio.MapGpioPinDigitalOutput.get("LED");
     final GpioPinDigitalOutput fan = ControlGpio.MapGpioPinDigitalOutput.get("fan");
     final GpioPinDigitalOutput atomizer = ControlGpio.MapGpioPinDigitalOutput.get("atomizer");
+    HashMap<String, String> socketData=new HashMap<>();
     public void getTemperatureHumidity(HashMap<String,GpioPinDigitalOutput> pin){
         //System.out.println("--------------GPIO信息");
         //风扇GPIO
@@ -38,27 +40,28 @@ public class ListenerTemperatureHumidity{
         System.out.println("温度"+temperature);
         sensorService.insertTemperature(temperature,humidity);
         OneToManyWebSocket oneToManyWebSocket = new OneToManyWebSocket();
-        gpioLED.getPin();
-        gpioLED.getState();
-        oneToManyWebSocket.sendMessageALL("湿度："+humidity+"---温度"+temperature+"--灯光："+gpioLED.getState()+"---风扇："+fan.getState()+"----雾化器："+atomizer.getState());
+        socketData.put("humidity",String.valueOf(humidity));
+        socketData.put("temperature",String.valueOf(temperature));
+        socketData.put("LED",String.valueOf(gpioLED.getState()));
+        socketData.put("fan",String.valueOf(fan.getState()));
+        socketData.put("atomizer",String.valueOf(atomizer.getState()));
+        oneToManyWebSocket.sendMessageALL(socketData);
         if(28.4<temperature){
             pinFan.high();
             //System.out.println("开启风扇");
         }else{
-            pinFan.low();
+            if(!"1".equals(ControlpanelServiceImpl.hardwareState.get("Fan")))
+                pinFan.low();
            // System.out.println("关闭风扇");
         }
         if(10>=humidity){
             pinAtomizer.high();
             //System.out.println("打开雾化器");
         }else{
-            pinAtomizer.low();
+            if(!"1".equals(ControlpanelServiceImpl.hardwareState.get("Atomizer")))
+                pinAtomizer.low();
             //System.out.println("关闭雾化器");
         }
 
     }
-    public void getTemperatureHumidityTest(){
-        sensorService.insertTemperature(22,44);
-    }
-
 }

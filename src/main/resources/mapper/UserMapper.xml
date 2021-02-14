@@ -15,5 +15,8 @@
         id,
         name, passwoed, remarks
     </sql>
+    <select id="getUserForPassword" parameterType="com.flower.flowerCulture.model.User" resultType="com.flower.flowerCulture.model.User">
+        select name,password,remarks from user where name=#{name} and password=#{password}
+    </select>
 
 </mapper>
